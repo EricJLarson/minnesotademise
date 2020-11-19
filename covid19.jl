@@ -48,6 +48,7 @@ end
 plotDeathsPerCapita(("Minnesota","mn"))
 plotDeathsPerCapita(("Massachusetts","ma"))
 plotDeathsPerCapita(("California","ca"))
+plotDeathsPerCapita(("North Dakota","nd"))
 
 file = "/tmp/covid";
 savefig(file);
