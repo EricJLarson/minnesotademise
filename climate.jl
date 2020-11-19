@@ -29,7 +29,6 @@ end
 
 function getData(params)
    resp = HTTP.request("POST", "https://data.rcc-acis.org/StnData", ["Content-Type" => "application/x-www-form-urlencoded"], params) 
-   println("Data retrieved")
    bodystr = String(resp.body);
    body = JSON.parse(bodystr);
 end
@@ -69,22 +68,25 @@ function getLinearRegression(dfyt)
 end
 
 function plotRegression(fit, temp)
-   println("Begin plotting")
    plot(fit,label="fit")
    ytrounded = map(x->round(x,digits=3), temp)
-   plot!(ytrounded,label="yt")
+   plot!(ytrounded,label="trend")
    file = "/tmp/climatetrend";
    savefig(file);
-   println("File saved as " * file * ".png");
-   println("On Mac, view with \"open " * file * ".png;\"");
+   return file;
 end
 
-function plotRegression(high)
-   dfyt = getTrend(high)
-   fit = getLinearRegression(dfyt)   
-   plotRegression(fit, dfyt.temp) 
-end 
+println("Requesting data")
+@time high = getHighs()
+println("Spectrum analysis")
+@time trend = getTrend(high)
+println("Generating regression")
+@time fit = getLinearRegression(trend)   
+println("Plotting")
+@time file = plotRegression(fit, trend.temp) 
+println("\nFile saved as " * file * ".png");
+println("On Mac, view with \"open " * file * ".png;\"");
 
-high = getHighs()
-#plotHighs(high)
-plotRegression(high)
+delta = last(fit) - first(fit)
+deltar= round(delta, digits=3)
+println("\nTemp increased $deltar F")
