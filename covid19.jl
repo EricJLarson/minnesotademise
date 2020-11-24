@@ -42,7 +42,7 @@ end
 function plotDeathsPerCapita((state, abbr))
    pop = getPopulation(state)
    smooth = getDeathPerCapita(abbr,pop);
-   plot!(smooth, title = ARGS[1], label = abbr)
+   plot!(smooth, title = ARGS[1], xlabel = "days ago", label = abbr)
 end
 
 column =  ARGS[1] == "death" ? :deathIncrease : :positiveIncrease;
