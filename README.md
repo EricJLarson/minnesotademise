@@ -1,4 +1,4 @@
-Data Analysis of Covid-19 and Climate
+Demise of Minnesota: Data Analysis of Covid-19 and Climate
 ===========
 
 This code pulls in data from the Internet, then generates a graphical report.
