@@ -28,7 +28,7 @@ end
 
 function getDeathPerCapita(state, pop)
    df = getStats(state)
-   perM = df[:deathIncrease] ./ (pop/(1000*1000));
+   perM = df[column] ./ (pop/(1000*1000));
    moving_average(vs,n) = [sum(@view vs[i:(i+n-1)])/n for i in 1:(length(vs)-(n-1))]
    smooth = moving_average(perM,5);
 end
@@ -42,13 +42,16 @@ end
 function plotDeathsPerCapita((state, abbr))
    pop = getPopulation(state)
    smooth = getDeathPerCapita(abbr,pop);
-   plot!(smooth, label = abbr)
+   plot!(smooth, title = ARGS[1], label = abbr)
 end
+
+column =  ARGS[1] == "death" ? :deathIncrease : :positiveIncrease;
 
 plotDeathsPerCapita(("Minnesota","mn"))
 plotDeathsPerCapita(("Massachusetts","ma"))
 plotDeathsPerCapita(("California","ca"))
 plotDeathsPerCapita(("North Dakota","nd"))
+plotDeathsPerCapita(("Wisconsin","wi"))
 
 file = "/tmp/covid";
 savefig(file);
