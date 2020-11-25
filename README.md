@@ -1,7 +1,7 @@
 Demise of Minnesota: Data Analysis of Covid-19 and Climate
 ===========
 ![Image of MN]
-(https://icons.iconarchive.com/icons/wikipedia/flags/128/US-MN-Minnesota-Flag-icon.png)
+(https://github.com/EricJLarson/minnesotademise/blob/master/US-MN-Minnesota-Flag-icon.png?raw=true)
 
 This code pulls in data from the Internet, then generates a graphical report.
 
